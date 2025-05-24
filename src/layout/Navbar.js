@@ -2,10 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const publisher = localStorage.getItem("publisher");
+
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userId");
     localStorage.removeItem("loggedInEmail");
+    localStorage.removeItem("publisher");
     window.location.href = "/login";
   };
   return (
@@ -23,14 +26,17 @@ const Navbar = () => {
               Home
             </Link>
           </li>
-          <li>
-            <Link
-              to="/content/new"
-              className="hover:text-blue-200 transition-colors duration-200"
-            >
-              Publish
-            </Link>
-          </li>
+          {publisher && (
+            <li>
+              <Link
+                to="/content/new"
+                className="hover:text-blue-200 transition-colors duration-200"
+              >
+                Publish
+              </Link>
+            </li>
+          )}
+
           <li>
             <button
               onClick={handleLogout}

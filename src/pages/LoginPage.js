@@ -13,9 +13,11 @@ const LoginPage = () => {
         const token = response.data.accessToken;
         const userId = response.data.userId;
         const loggedInEmail = response.data.email;
+        const publisher = response.data.publisher;
         localStorage.setItem("authToken", token);
         localStorage.setItem("userId", userId);
         localStorage.setItem("loggedInEmail", loggedInEmail);
+        localStorage.setItem("publisher", publisher);
         setMessage("Login successful!");
         window.location.href = "/";
       })

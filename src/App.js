@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RootLayout from "./layout/RootLayout";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import ContentListPage from "./pages/ContentListPage";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         </Routes>
         <RootLayout>
           <Routes>
-            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<ContentListPage />} />
             {/* <Route path="/content/new" element={<ContentForm />} />
             <Route path="/content/:id" element={<ContentDetail />} />
             <Route

@@ -1,7 +1,8 @@
 import axiosInstance from "./axios/axiosInstance";
 
 // Get all content
-export const fetchAllContent = () => axiosInstance.get("/api/content");
+export const fetchContent = (page, size) =>
+  axiosInstance.get(`/api/contents?page=${page}&size=${size}`);
 
 // Get content by ID
 export const fetchContentById = (id) => axiosInstance.get(`/api/content/${id}`);

@@ -1,7 +1,7 @@
 import React from "react";
 
 function App() {
-  return <div>Hi Vipi</div>;
+  return <></>;
 }
 
 export default App;

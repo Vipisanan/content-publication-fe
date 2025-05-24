@@ -26,6 +26,14 @@ const Navbar = () => {
               Home
             </Link>
           </li>
+          <li>
+            <Link
+              to="/category"
+              className="hover:text-blue-200 transition-colors duration-200"
+            >
+              Category
+            </Link>
+          </li>
           {publisher && (
             <li>
               <Link

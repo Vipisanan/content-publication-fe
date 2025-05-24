@@ -45,7 +45,17 @@ const ContentListPage = () => {
 
   return (
     <div className="container mt-4">
-      <h2>Contents</h2>
+      <div className="mb-4 flex items-center justify-between">
+        <h2>Contents</h2>
+        <button
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          onClick={() => navigate("/content/new")}
+          type="button"
+        >
+          Create New Content
+        </button>
+      </div>
+
       {loading && <div>Loading...</div>}
       <div className="row">
         {contents.map((content) => (

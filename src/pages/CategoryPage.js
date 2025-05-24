@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { fetchAllCategories } from "../api/contentService";
 import toast from "react-hot-toast";
-import { fetchUserSubscriptions } from "../api/NotificationService";
+import {
+  fetchUserSubscriptions,
+  subscribeToCategory,
+  unsubscribeFromCategory,
+} from "../api/NotificationService";
 import CategoryListComponent from "../components/CategoryListComponent";
 
 export default function CategoryPage() {
   const [categories, setCategories] = useState([]);
-  const [subscribed, setSubscribed] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,12 +49,32 @@ export default function CategoryPage() {
     try {
       if (isSubscribed) {
         // Unsubscribe
-        await fetch(`/api/categories/${catId}/unsubscribe`, { method: "POST" });
-        setSubscribed(subscribed.filter((id) => id !== catId));
+        unsubscribeFromCategory(localStorage.getItem("userId"), catId)
+          .then(() => {
+            toast.success("Unsubscribed successfully");
+            setCategories((prevCats) =>
+              prevCats.map((cat) =>
+                cat.id === catId ? { ...cat, subscribed: false } : cat
+              )
+            );
+          })
+          .catch(() => {
+            toast.error("Failed to unsubscribe");
+          });
       } else {
         // Subscribe
-        await fetch(`/api/categories/${catId}/subscribe`, { method: "POST" });
-        setSubscribed([...subscribed, catId]);
+        subscribeToCategory(localStorage.getItem("userId"), catId)
+          .then(() => {
+            toast.success("Subscribed successfully");
+            setCategories((prevCats) =>
+              prevCats.map((cat) =>
+                cat.id === catId ? { ...cat, subscribed: true } : cat
+              )
+            );
+          })
+          .catch(() => {
+            toast.error("Failed to subscribe");
+          });
       }
     } catch (err) {
       // handle error (optional: show toast)

@@ -4,6 +4,8 @@ import RootLayout from "./layout/RootLayout";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ContentListPage from "./pages/ContentListPage";
+import { CreateContentPage } from "./pages/CreateContentPage";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const token = localStorage.getItem("authToken");
@@ -14,8 +16,8 @@ function App() {
           <RootLayout>
             <Routes>
               <Route path="/" element={<ContentListPage />} />
-              {/* <Route path="/content/new" element={<ContentForm />} />
-            <Route path="/content/:id" element={<ContentDetail />} />
+              <Route path="/content/new" element={<CreateContentPage />} />
+              {/*<Route path="/content/:id" element={<ContentDetail />} />
             <Route
               path="/content/:id/edit"
               element={<ContentForm editMode />}
@@ -30,6 +32,7 @@ function App() {
           </Routes>
         )}
       </Router>
+      <Toaster position="top-right" reverseOrder={false} />
     </>
   );
 }

@@ -8,9 +8,12 @@ const LoginPage = () => {
   const handleFormSubmit = (data) => {
     login(data)
       .then((response) => {
-        console.log("Login successful", response);
         const token = response.data.accessToken;
+        const userId = response.data.userId;
+        const loggedInEmail = response.data.email;
         localStorage.setItem("authToken", token);
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("loggedInEmail", loggedInEmail);
         setMessage("Login successful!");
         window.location.href = "/";
       })

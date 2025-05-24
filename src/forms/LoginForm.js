@@ -74,7 +74,7 @@ const LoginForm = ({ handleLoginSubmit, msg }) => {
         >
           Login
         </button>
-        {msg && <p className="text-center mt-4 text-sm text-gray-600">{msg}</p>}
+        {msg && <p className="text-center mt-4 text-sm text-red-600">{msg}</p>}
       </form>
     </div>
   );

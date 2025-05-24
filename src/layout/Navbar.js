@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
-    // navigate("/login");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("loggedInEmail");
     window.location.href = "/login";
   };
   return (

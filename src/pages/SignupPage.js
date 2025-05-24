@@ -2,6 +2,7 @@ import React from "react";
 import { signup } from "../api/AuthService";
 import SignupForm from "../forms/SignupForm";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const SignupPage = () => {
   const [message, setMessage] = React.useState("");
@@ -12,7 +13,8 @@ const SignupPage = () => {
     signup(data)
       .then((response) => {
         console.log("Login successful", response);
-        setMessage("Signup successful!");
+        toast.success("Signup successful! You can now log in.");
+        navigate("/login");
       })
       .catch((error) => {
         console.error("Login failed", error);

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const publisher = localStorage.getItem("publisher");
+  const publisher = localStorage.getItem("publisher") === "true";
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");

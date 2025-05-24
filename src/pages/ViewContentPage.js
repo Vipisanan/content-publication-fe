@@ -4,13 +4,12 @@ import ViewContentComponent from "../components/ViewContentComponent";
 import { fetchContentById } from "../api/contentService";
 
 export default function ViewContentPage() {
-  const { id } = useParams(); // Assuming your route is something like /content/:id
+  const { id } = useParams();
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Replace with your real API endpoint
     fetchContentById(id)
       .then((data) => {
         setContent(data.data);

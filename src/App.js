@@ -6,25 +6,29 @@ import SignupPage from "./pages/SignupPage";
 import ContentListPage from "./pages/ContentListPage";
 
 function App() {
+  const token = localStorage.getItem("authToken");
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-        </Routes>
-        <RootLayout>
-          <Routes>
-            <Route path="/" element={<ContentListPage />} />
-            {/* <Route path="/content/new" element={<ContentForm />} />
+        {token ? (
+          <RootLayout>
+            <Routes>
+              <Route path="/" element={<ContentListPage />} />
+              {/* <Route path="/content/new" element={<ContentForm />} />
             <Route path="/content/:id" element={<ContentDetail />} />
             <Route
               path="/content/:id/edit"
               element={<ContentForm editMode />}
             /> */}
-            {/* Add more routes as needed */}
+              {/* Add more routes as needed */}
+            </Routes>
+          </RootLayout>
+        ) : (
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
           </Routes>
-        </RootLayout>
+        )}
       </Router>
     </>
   );

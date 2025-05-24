@@ -6,11 +6,13 @@ const LoginPage = () => {
   const [message, setMessage] = React.useState("");
 
   const handleFormSubmit = (data) => {
-    console.log("Form submitted with data: ", data);
     login(data)
       .then((response) => {
         console.log("Login successful", response);
+        const token = response.data.accessToken;
+        localStorage.setItem("authToken", token);
         setMessage("Login successful!");
+        window.location.href = "/";
       })
       .catch((error) => {
         console.error("Login failed", error);

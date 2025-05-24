@@ -32,14 +32,6 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link
-              to="/signup"
-              className="hover:text-blue-200 transition-colors duration-200"
-            >
-              Sign Up
-            </Link>
-          </li>
-          <li>
             <button
               onClick={handleLogout}
               className="hover:text-blue-200 transition-colors duration-200"

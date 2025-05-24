@@ -34,7 +34,7 @@ const ContentListPage = () => {
   }, []);
 
   const handleSeeMore = (contentId) => {
-    navigate(`/contents/${contentId}`);
+    navigate(`/content/${contentId}`);
   };
 
   const handlePageChange = (newPage) => {

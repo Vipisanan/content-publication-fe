@@ -15,7 +15,6 @@ export function useNotifications(userId, onNotification) {
           (message) => {
             const notification = JSON.parse(message.body);
             onNotification(notification);
-            console.log("Received notification:", notification);
           }
         );
       },

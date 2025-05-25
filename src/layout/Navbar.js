@@ -18,7 +18,8 @@ const Navbar = () => {
 
   // Use useCallback to prevent unnecessary re-subscribes
   const handleNotification = useCallback((notification) => {
-    toast.success(`New notification: ${notification.message}`, {
+    toast(` ${notification.message}`, {
+      icon: "👏",
       pauseOnFocusLoss: false,
       duration: 5000,
     });

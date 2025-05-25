@@ -8,6 +8,7 @@ import { CreateContentPage } from "./pages/CreateContentPage";
 import { Toaster } from "react-hot-toast";
 import ViewContentPage from "./pages/ViewContentPage";
 import CategoryPage from "./pages/CategoryPage";
+import AddProfilePage from "./pages/AddProfilePage";
 
 function App() {
   const token = localStorage.getItem("authToken");
@@ -23,6 +24,7 @@ function App() {
               <Route path="/content/new" element={<CreateContentPage />} />
               <Route path="/content/:id" element={<ViewContentPage />} />
               <Route path="/category" element={<CategoryPage />} />
+              <Route path="/add-profile" element={<AddProfilePage />} />
               {/*<Route
               path="/content/:id/edit"
               element={<ContentForm editMode />}

@@ -48,7 +48,7 @@ const ContentListPage = () => {
     <div className="container mt-4">
       <div className="mb-4 flex items-center justify-between">
         <h2>Contents</h2>
-        {publisher && (
+        {publisher ? (
           <button
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             onClick={() => navigate("/content/new")}
@@ -56,6 +56,16 @@ const ContentListPage = () => {
           >
             Create New Content
           </button>
+        ) : (
+          <>
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              onClick={() => navigate("/add-profile")}
+              type="button"
+            >
+              Add Profile to become a Publisher
+            </button>
+          </>
         )}
       </div>
 

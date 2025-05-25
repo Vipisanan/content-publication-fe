@@ -4,3 +4,7 @@ export const signup = (data) => axiosUser.post("/api/auth/signup", data);
 
 // Get user by userId
 export const getUserById = (userId) => axiosUser.get(`/api/users/${userId}`);
+
+// Add profile for user
+export const addProfile = (userId, data) =>
+  axiosUser.put(`/api/users/${userId}/profile`, data);

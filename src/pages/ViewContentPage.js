@@ -9,7 +9,6 @@ export default function ViewContentPage() {
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const userId = localStorage.getItem("userId");
   const [user, setUser] = useState(null);
 
   useEffect(() => {

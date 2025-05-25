@@ -32,7 +32,7 @@ export default function ViewContentComponent({
   return (
     <>
       <div className="max-w-2xl mx-auto p-6 border rounded shadow">
-        {content.writerId.toString() === userId && (
+        {content.writerId === userId && (
           <>
             <button
               className={`${

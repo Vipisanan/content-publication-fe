@@ -9,9 +9,10 @@ import { Toaster } from "react-hot-toast";
 import ViewContentPage from "./pages/ViewContentPage";
 import CategoryPage from "./pages/CategoryPage";
 import AddProfilePage from "./pages/AddProfilePage";
+import { useSelector } from "react-redux";
 
 function App() {
-  const token = localStorage.getItem("authToken");
+  const token = useSelector((state) => state.auth.token);
   return (
     <>
       {/* <NotificationDropdown userId={userId} /> */}

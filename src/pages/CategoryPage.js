@@ -7,17 +7,19 @@ import {
   unsubscribeFromCategory,
 } from "../api/NotificationService";
 import CategoryListComponent from "../components/CategoryListComponent";
+import { useSelector } from "react-redux";
 
 export default function CategoryPage() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const userId = useSelector((state) => state.auth.userId);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const [catRes, subRes] = await Promise.all([
           fetchAllCategories(),
-          fetchUserSubscriptions(localStorage.getItem("userId")),
+          fetchUserSubscriptions(userId),
         ]);
         const categories = catRes.data;
         const subscriptions = subRes.data;
@@ -42,14 +44,14 @@ export default function CategoryPage() {
       }
     }
     fetchData();
-  }, []);
+  }, [userId]);
 
   // Subscribe/unsubscribe handler
   const handleToggleSubscription = async (catId, isSubscribed) => {
     try {
       if (isSubscribed) {
         // Unsubscribe
-        unsubscribeFromCategory(localStorage.getItem("userId"), catId)
+        unsubscribeFromCategory(userId, catId)
           .then(() => {
             toast.success("Unsubscribed successfully");
             setCategories((prevCats) =>
@@ -63,7 +65,7 @@ export default function CategoryPage() {
           });
       } else {
         // Subscribe
-        subscribeToCategory(localStorage.getItem("userId"), catId)
+        subscribeToCategory(userId, catId)
           .then(() => {
             toast.success("Subscribed successfully");
             setCategories((prevCats) =>

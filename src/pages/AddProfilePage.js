@@ -3,25 +3,32 @@ import { useNavigate } from "react-router-dom";
 import { addProfile } from "../api/AuthService";
 import toast from "react-hot-toast";
 import ProfileForm from "../forms/ProfileForm";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setPublisher } from "../store/authSlice";
 
 export default function AddProfilePage() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const userId = localStorage.getItem("userId");
+  const userId = useSelector((state) => state.auth.userId);
+  const dispatch = useDispatch();
 
   async function handleAddProfile(data) {
     setLoading(true);
-    try {
-      addProfile(userId, data).then((res) => {
-        console.log("Profile added successfully:", res.data);
+    console.log(userId, data);
+    addProfile(userId, data)
+      .then((res) => {
+        dispatch(setPublisher({ publisher: true }));
         toast.success("Profile added successfully!");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error("Failed to add profile:", err);
+        toast.error("Failed to add profile");
+      })
+      .finally(() => {
+        setLoading(false);
       });
-      navigate("/");
-    } catch (err) {
-      toast.error("Failed to add profile. Please try again.");
-    } finally {
-      setLoading(false);
-    }
   }
 
   return (

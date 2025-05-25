@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchContent } from "../api/contentService";
 import ContentCard from "../components/ContentCart";
 import Pagination from "../components/Pagination";
+import { useSelector } from "react-redux";
 
 const PAGE_SIZE = 5;
 
@@ -11,7 +12,7 @@ const ContentListPage = () => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
-  const publisher = localStorage.getItem("publisher") === "true";
+  const publisher = useSelector((state) => state.auth.publisher);
 
   const navigate = useNavigate();
 

@@ -9,6 +9,7 @@ import {
 import { getUserById } from "../api/AuthService";
 import toast from "react-hot-toast";
 import CustomModal from "../components/modal/CustomModal";
+import { useSelector } from "react-redux";
 
 export default function ViewContentPage() {
   const { id } = useParams();
@@ -16,7 +17,7 @@ export default function ViewContentPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
-  const userId = localStorage.getItem("userId");
+  const userId = useSelector((state) => state.auth.userId);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 

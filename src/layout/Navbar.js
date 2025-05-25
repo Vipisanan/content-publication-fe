@@ -4,11 +4,15 @@ import { useNotifications } from "../hooks/useNotifications";
 import NotificationBellDropdown from "../components/NotificationBellWrapper";
 import { fetchUnreadNotifications } from "../api/NotificationService";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { clearAuth } from "../store/authSlice";
 
 const Navbar = () => {
-  const publisher = localStorage.getItem("publisher") === "true";
-  const userId = localStorage.getItem("userId");
+  const publisher = useSelector((state) => state.auth.publisher);
+  const userId = useSelector((state) => state.auth.userId);
+  const email = useSelector((state) => state.auth.email);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [notifications, setNotifications] = useState([]);
 
@@ -34,17 +38,15 @@ const Navbar = () => {
   }, [userId]);
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("loggedInEmail");
-    localStorage.removeItem("publisher");
-    window.location.href = "/login";
+    dispatch(clearAuth());
+    navigate("/login");
   };
   return (
     <nav className="bg-blue-700 px-4 py-3 shadow">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white font-bold text-xl">
           <Link to="/">ContentPub</Link>
+          <p className="text-sm text-gray-200">{email}</p>
         </div>
         <ul className="flex space-x-6 text-white">
           <li>

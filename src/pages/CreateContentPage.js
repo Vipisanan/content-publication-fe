@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { fetchAllCategories, createContent } from "../api/contentService";
 import CreateContentForm from "../forms/CreateContentForm";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 export function CreateContentPage() {
   const [categories, setCategories] = useState([]);
+  const writerId = useSelector((state) => state.auth.userId);
 
   useEffect(() => {
     fetchAllCategories()
@@ -22,7 +24,6 @@ export function CreateContentPage() {
   }, []);
 
   const handleFormSubmit = (formData) => {
-    const writerId = localStorage.getItem("userId");
     createContent({ ...formData, writerId: writerId })
       .then((data) => {
         toast.success("Content created successfully!");

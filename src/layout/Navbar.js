@@ -1,8 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useNotifications } from "../hooks/useNotifications";
+import NotificationBellDropdown from "../components/NotificationBellWrapper";
 
 const Navbar = () => {
   const publisher = localStorage.getItem("publisher") === "true";
+  const userId = localStorage.getItem("userId");
+  const navigate = useNavigate();
+
+  const [notifications, setNotifications] = useState([]);
+
+  // Use useCallback to prevent unnecessary re-subscribes
+  const handleNotification = useCallback((notification) => {
+    setNotifications((prev) => [notification, ...prev]);
+  }, []);
+
+  useNotifications(userId, handleNotification);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -18,6 +31,13 @@ const Navbar = () => {
           <Link to="/">ContentPub</Link>
         </div>
         <ul className="flex space-x-6 text-white">
+          <li>
+            {/* Other icons or links */}
+            <NotificationBellDropdown
+              unreadNotifications={notifications}
+              onSeeAll={() => navigate("/notifications")}
+            />
+          </li>
           <li>
             <Link
               to="/"

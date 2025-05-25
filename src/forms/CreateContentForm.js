@@ -87,10 +87,6 @@ export default function CreateContentForm({
           }
           error={errors.categoryNames}
         />
-
-        {errors.categoryNames && (
-          <div className="text-red-500">{errors.categoryNames}</div>
-        )}
       </div>
       <button
         type="submit"

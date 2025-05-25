@@ -35,10 +35,12 @@ export default function ViewContentComponent({
         {content.writerId.toString() === userId && (
           <>
             <button
-              className="bg-yellow-500 text-white px-3 py-1 rounded mr-2"
-              onClick={() => setEditing(true)}
+              className={`${
+                editing ? "bg-gray-300 text-black" : "bg-yellow-500 text-white"
+              } + px-3 py-1 rounded mr-2`}
+              onClick={() => setEditing(!editing)}
             >
-              Edit
+              {editing ? "Cancel edit" : "Edit"}
             </button>
             <button
               className="bg-red-500 text-white px-3 py-1 rounded mr-2"

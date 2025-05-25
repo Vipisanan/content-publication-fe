@@ -8,11 +8,15 @@ import { CreateContentPage } from "./pages/CreateContentPage";
 import { Toaster } from "react-hot-toast";
 import ViewContentPage from "./pages/ViewContentPage";
 import CategoryPage from "./pages/CategoryPage";
+import NotificationDropdown from "./components/NotificationDropdown";
 
 function App() {
   const token = localStorage.getItem("authToken");
+  const userId = localStorage.getItem("userId");
   return (
     <>
+      <NotificationDropdown userId={userId} />
+
       <Router>
         {token ? (
           <RootLayout>

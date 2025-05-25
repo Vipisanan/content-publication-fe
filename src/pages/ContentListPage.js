@@ -11,6 +11,7 @@ const ContentListPage = () => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const publisher = localStorage.getItem("publisher") === "true";
 
   const navigate = useNavigate();
 
@@ -47,13 +48,15 @@ const ContentListPage = () => {
     <div className="container mt-4">
       <div className="mb-4 flex items-center justify-between">
         <h2>Contents</h2>
-        <button
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          onClick={() => navigate("/content/new")}
-          type="button"
-        >
-          Create New Content
-        </button>
+        {publisher && (
+          <button
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            onClick={() => navigate("/content/new")}
+            type="button"
+          >
+            Create New Content
+          </button>
+        )}
       </div>
 
       {loading && <div>Loading...</div>}

@@ -65,7 +65,7 @@ export default function NotificationBell({
                   className="px-4 py-3 border-b last:border-b-0 hover:bg-gray-50 transition"
                 >
                   <div className="text-sm text-gray-800">{n.message}</div>
-                  <div className="text-xs text-gray-400">{n.type}</div>
+                  <div className="text-xs text-gray-400">{n.createdAt}</div>
                 </div>
               ))
             )}

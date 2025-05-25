@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function ViewContentComponent({ content }) {
+export default function ViewContentComponent({ content, user }) {
   // content should have: id, writerId, title, details, categoryNames, etc.
   return (
     <div className="max-w-2xl mx-auto p-6 border rounded shadow">
       <h1 className="text-3xl font-bold mb-3">{content.title}</h1>
       <div className="mb-2 text-gray-600">
-        <span>Writer ID: {content.writerId}</span>
+        <span>Writer: {user?.profile?.displayName}</span>
       </div>
       {content.categoryNames && (
         <div className="mb-3">

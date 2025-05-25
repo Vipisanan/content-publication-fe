@@ -45,7 +45,7 @@ export default function ViewContentPage() {
   }, [content]);
 
   const editCatogory = (data) => {
-    editContent(userId, data)
+    editContent(content.id, data)
       .then((res) => {
         console.log("Content updated successfully:", res.data);
         toast.success("Content updated successfully:");

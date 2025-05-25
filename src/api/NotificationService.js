@@ -17,3 +17,7 @@ export const unsubscribeFromCategory = (userId, categoryId) =>
     userId,
     categoryId,
   });
+
+// Get all unread notifications for a user
+export const fetchUnreadNotifications = (userId) =>
+  axiosNotification.get(`/api/notifications/unread?userId=${userId}`);

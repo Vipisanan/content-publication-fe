@@ -1,7 +1,9 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useNotifications } from "../hooks/useNotifications";
 import NotificationBellDropdown from "../components/NotificationBellWrapper";
+import { fetchUnreadNotifications } from "../api/NotificationService";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const publisher = localStorage.getItem("publisher") === "true";
@@ -12,10 +14,24 @@ const Navbar = () => {
 
   // Use useCallback to prevent unnecessary re-subscribes
   const handleNotification = useCallback((notification) => {
+    toast.success(`New notification: ${notification.message}`, {
+      pauseOnFocusLoss: false,
+      duration: 5000,
+    });
     setNotifications((prev) => [notification, ...prev]);
   }, []);
 
   useNotifications(userId, handleNotification);
+
+  useEffect(() => {
+    fetchUnreadNotifications(userId)
+      .then((response) => {
+        setNotifications(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching notifications:", error);
+      });
+  }, [userId]);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");

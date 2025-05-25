@@ -37,7 +37,13 @@ function App() {
           </Routes>
         )}
       </Router>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 5000,
+        }}
+        reverseOrder={false}
+      />
     </>
   );
 }

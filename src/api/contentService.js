@@ -26,3 +26,7 @@ export const fetchAllCategories = () => axiosInstance.get(`/api/categories`);
 // Edit content
 export const editContent = (id, data) =>
   axiosInstance.put(`/api/contents/${id}`, data);
+
+// Delete content by ID
+export const deleteContentById = (id) =>
+  axiosInstance.delete(`/api/contents/${id}`);

@@ -15,7 +15,7 @@ const CategoryForm = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     reset,
   } = useForm({
     resolver: yupResolver(schema),

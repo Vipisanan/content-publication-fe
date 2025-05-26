@@ -116,13 +116,11 @@ export default function CategoryPage() {
         {publisher && (
           <button
             type="button"
-            className={
-              `${
-                showAddCategoryForm
-                  ? "bg-gray-300 hover:bg-gray-400 text-black"
-                  : "bg-blue-600 hover:bg-blue-700 text-white"
-              }` + " font-bold py-2 px-4 rounded"
-            }
+            className={`${
+              showAddCategoryForm
+                ? "bg-gray-300 hover:bg-gray-400 text-black"
+                : "bg-blue-600 hover:bg-blue-700 text-white"
+            } font-bold py-2 px-4 rounded`}
             onClick={() => setShowAddCategoryForm((f) => !f)}
           >
             {showAddCategoryForm ? "Cancel" : "Add Category"}

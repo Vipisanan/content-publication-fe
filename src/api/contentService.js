@@ -30,3 +30,7 @@ export const editContent = (id, data) =>
 // Delete content by ID
 export const deleteContentById = (id) =>
   axiosInstance.delete(`/api/contents/${id}`);
+
+// Create new category
+export const createCategory = (data) =>
+  axiosInstance.post("/api/categories", data);

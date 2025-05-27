@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ViewContentComponent from "../components/ViewContentComponent";
 import {
+  createComment,
   deleteContentById,
   editContent,
+  fetchCommentsByContentId,
   fetchContentById,
 } from "../api/contentService";
-import { getUserById } from "../api/AuthService";
+import { fetchUsersByIds, getUserById } from "../api/AuthService";
 import toast from "react-hot-toast";
 import CustomModal from "../components/modal/CustomModal";
 import { useSelector } from "react-redux";
+import CommentSection from "../components/CommentSection";
 
 export default function ViewContentPage() {
   const { id } = useParams();
@@ -20,6 +23,7 @@ export default function ViewContentPage() {
   const userId = useSelector((state) => state.auth.userId);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     fetchContentById(id)
@@ -31,7 +35,24 @@ export default function ViewContentPage() {
         setError(err.message);
         setLoading(false);
       });
+    fetchCommentsWithUser(id);
   }, [id]);
+
+  const fetchCommentsWithUser = (contentId) => {
+    fetchCommentsByContentId(contentId).then(async (res) => {
+      setComments(res.data);
+      const userIds = [...new Set(res.data.map((c) => c.userId))];
+      console.log("Fetching users for comment userIds:", userIds);
+      const usersMap = await fetchUsersByIds(userIds);
+      console.log("Fetched users:", usersMap.data);
+      const enrichedComments = res.data.map((comment) => ({
+        ...comment,
+        user: usersMap.data.find((user) => user.id === comment.userId) || null,
+      }));
+      setComments(enrichedComments);
+      console.log("Fetched comments with users:", enrichedComments);
+    });
+  };
 
   useEffect(() => {
     content?.writerId &&
@@ -69,6 +90,24 @@ export default function ViewContentPage() {
       });
   };
 
+  const handleAddComment = (text) => {
+    const newComment = {
+      contentId: id,
+      userId: userId,
+      text,
+    };
+    createComment(newComment)
+      .then((res) => {
+        console.log("Comment added successfully:", res.data);
+        toast.success("Comment added successfully");
+        fetchCommentsWithUser(id);
+      })
+      .catch((err) => {
+        console.error("Failed to add comment:", err);
+        toast.error("Failed to add comment");
+      });
+  };
+
   if (loading) return <div className="p-6">Loading...</div>;
   if (error) return <div className="p-6 text-red-600">{error}</div>;
   if (!content) return <div className="p-6">No content found.</div>;
@@ -92,6 +131,11 @@ export default function ViewContentPage() {
         handleEditing={editCatogory}
         userId={userId}
       />
+      <>
+        <div className="max-w-2xl mx-auto p-6 border rounded shadow">
+          <CommentSection comments={comments} onAddComment={handleAddComment} />
+        </div>
+      </>
     </>
   );
 }

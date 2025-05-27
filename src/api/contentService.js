@@ -34,3 +34,11 @@ export const deleteContentById = (id) =>
 // Create new category
 export const createCategory = (data) =>
   axiosInstance.post("/api/categories", data);
+
+// Get all comments for content
+export const fetchCommentsByContentId = (contentId) =>
+  axiosInstance.get(`/api/comments/by-content/${contentId}`);
+
+// Create new comment
+export const createComment = (data) =>
+  axiosInstance.post("/api/comments", data);

@@ -8,3 +8,7 @@ export const getUserById = (userId) => axiosUser.get(`/api/users/${userId}`);
 // Add profile for user
 export const addProfile = (userId, data) =>
   axiosUser.put(`/api/users/${userId}/profile`, data);
+
+//Get users by ids
+export const fetchUsersByIds = (userIds) =>
+  axiosUser.post(`/api/users/bulk`, userIds);

@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
  * @param {Array} props.comments
  * @param {function} props.onAddComment
  */
-const CommentSection = ({ comments, onAddComment }) => {
+const CommentSection = ({ writerId, comments, onAddComment }) => {
   const userId = useSelector((state) => state.auth.userId);
   return (
     <div className="bg-gray-50 py-6 px-4 rounded shadow-sm">
@@ -26,7 +26,7 @@ const CommentSection = ({ comments, onAddComment }) => {
                   </span>
                 </div>
                 {/* Optionally show userId or contentId */}
-                {userId === comment.userId ? (
+                {writerId === comment.userId ? (
                   <div className="text-xs text-gray-500">
                     Owner:{" "}
                     {comment?.user?.profile === null

@@ -133,7 +133,11 @@ export default function ViewContentPage() {
       />
       <>
         <div className="max-w-2xl mx-auto p-6 border rounded shadow">
-          <CommentSection comments={comments} onAddComment={handleAddComment} />
+          <CommentSection
+            writerId={content?.writerId}
+            comments={comments}
+            onAddComment={handleAddComment}
+          />
         </div>
       </>
     </>

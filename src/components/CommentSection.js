@@ -1,5 +1,6 @@
 import React from "react";
 import CommentForm from "../forms/CommentForm";
+import { useSelector } from "react-redux";
 
 /**
  * @param {Object} props
@@ -7,6 +8,7 @@ import CommentForm from "../forms/CommentForm";
  * @param {function} props.onAddComment
  */
 const CommentSection = ({ comments, onAddComment }) => {
+  const userId = useSelector((state) => state.auth.userId);
   return (
     <div className="bg-gray-50 py-6 px-4 rounded shadow-sm">
       <CommentForm onSubmit={onAddComment} />
@@ -24,12 +26,21 @@ const CommentSection = ({ comments, onAddComment }) => {
                   </span>
                 </div>
                 {/* Optionally show userId or contentId */}
-                <div className="text-xs text-gray-500">
-                  User:{" "}
-                  {comment?.user?.profile === null
-                    ? comment?.user?.email
-                    : comment?.user?.profile?.displayName}
-                </div>
+                {userId === comment.userId ? (
+                  <div className="text-xs text-gray-500">
+                    Owner:{" "}
+                    {comment?.user?.profile === null
+                      ? comment?.user?.email
+                      : comment?.user?.profile?.displayName}
+                  </div>
+                ) : (
+                  <div className="text-xs text-gray-500">
+                    User:{" "}
+                    {comment?.user?.profile === null
+                      ? comment?.user?.email
+                      : comment?.user?.profile?.displayName}
+                  </div>
+                )}
               </li>
             ))
           ) : (

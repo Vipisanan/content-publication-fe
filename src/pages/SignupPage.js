@@ -17,8 +17,8 @@ const SignupPage = () => {
         navigate("/login");
       })
       .catch((error) => {
-        console.error("Login failed", error);
-        setMessage("Signup failed. Please check your credentials.");
+        console.error("Login failed", error.response.data.message);
+        setMessage(error?.response?.data?.message || "Signup failed");
       });
   };
   const handleRedirectLogin = () => {

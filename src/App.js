@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import RootLayout from "./layout/RootLayout";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -13,10 +18,9 @@ import { useSelector } from "react-redux";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
+
   return (
     <>
-      {/* <NotificationDropdown userId={userId} /> */}
-
       <Router>
         {token ? (
           <RootLayout>
@@ -26,25 +30,21 @@ function App() {
               <Route path="/content/:id" element={<ViewContentPage />} />
               <Route path="/category" element={<CategoryPage />} />
               <Route path="/add-profile" element={<AddProfilePage />} />
-              {/*<Route
-              path="/content/:id/edit"
-              element={<ContentForm editMode />}
-            /> */}
-              {/* Add more routes as needed */}
+              <Route path="*" element={<div>404 - Page Not Found</div>} />
             </Routes>
           </RootLayout>
         ) : (
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         )}
       </Router>
+
       <Toaster
         position="top-right"
-        toastOptions={{
-          duration: 5000,
-        }}
+        toastOptions={{ duration: 5000 }}
         reverseOrder={false}
       />
     </>

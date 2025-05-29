@@ -8,7 +8,10 @@ export function useNotifications(userId, onNotification) {
   useEffect(() => {
     if (!userId) return;
     client.current = new Client({
-      webSocketFactory: () => new SockJS("http://52.90.134.179:8083/api/ws"),
+      webSocketFactory: () =>
+        new SockJS(
+          "https://mxoz1xniv8.execute-api.us-east-1.amazonaws.com/dev/ws"
+        ),
       onConnect: () => {
         client.current.subscribe(
           `/topic/notifications.${userId}`,

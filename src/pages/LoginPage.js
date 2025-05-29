@@ -11,6 +11,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
 
   const handleFormSubmit = (data) => {
+    setMessage(null);
     login(data)
       .then((response) => {
         const token = response.data.accessToken;

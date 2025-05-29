@@ -9,7 +9,7 @@ const SignupPage = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = (data) => {
-    console.log("Form submitted with data: ", data);
+    setMessage(null);
     signup(data)
       .then((response) => {
         console.log("Login successful", response);

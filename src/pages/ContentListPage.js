@@ -5,7 +5,7 @@ import ContentCard from "../components/ContentCart";
 import Pagination from "../components/Pagination";
 import { useSelector } from "react-redux";
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 20;
 
 const ContentListPage = () => {
   const [contents, setContents] = useState([]);

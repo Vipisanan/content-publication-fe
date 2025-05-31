@@ -8,7 +8,7 @@ export function useNotifications(userId, onNotification) {
   useEffect(() => {
     if (!userId) return;
     client.current = new Client({
-      webSocketFactory: () => new SockJS("http://localhost:8083/ws"),
+      webSocketFactory: () => new SockJS("http://localhost:8083/api/ws"),
       onConnect: () => {
         client.current.subscribe(
           `/topic/notifications.${userId}`,

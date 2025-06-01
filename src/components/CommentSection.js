@@ -23,7 +23,7 @@ const CommentSection = ({ writerId, comments, onAddComment }) => {
                       new Date(comment.createdAt).toLocaleString()}
                   </span>
                 </div>
-                {/* Optionally show userId or contentId */}
+                {/* show user name or email */}
                 {writerId === comment.userId ? (
                   <div className="text-xs text-gray-500">
                     Owner:{" "}

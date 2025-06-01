@@ -1,6 +1,5 @@
 import React from "react";
 import CommentForm from "../forms/CommentForm";
-import { useSelector } from "react-redux";
 
 /**
  * @param {Object} props
@@ -8,7 +7,6 @@ import { useSelector } from "react-redux";
  * @param {function} props.onAddComment
  */
 const CommentSection = ({ writerId, comments, onAddComment }) => {
-  const userId = useSelector((state) => state.auth.userId);
   return (
     <div className="bg-gray-50 py-6 px-4 rounded shadow-sm">
       <CommentForm onSubmit={onAddComment} />

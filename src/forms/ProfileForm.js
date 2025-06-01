@@ -26,7 +26,6 @@ export default function ProfileForm({
     register,
     handleSubmit,
     formState: { errors, isValid },
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
